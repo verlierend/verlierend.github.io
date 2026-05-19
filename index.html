@@ -231,7 +231,7 @@ button:active{
                value="8000">
     </div>
 
-    <button onclick="startGame()">ゲーム開始</button>
+    <button onclick="startGame()">開始</button>
 
 </div>
 
@@ -331,7 +331,7 @@ function startGame(){
     document.getElementById("starterText").innerText =
         players[starter].name;
 
-    changeScreen("startScreen");
+    showGame();
 }
 
 function createPlayerHTML(player,index){
