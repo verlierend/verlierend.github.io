@@ -14,6 +14,7 @@
 <title>ライフ計算</title>
 
 <style>
+
 html,body{
     margin:0;
     padding:0;
@@ -22,9 +23,11 @@ html,body{
     height:100%;
 
     overflow:hidden;
-    position:fixed;
     touch-action:manipulation;
+
+    overscroll-behavior:none;
 }
+
 body{
     margin:0;
     background:#123456;
@@ -38,8 +41,8 @@ body{
     padding:10px;
     box-sizing:border-box;
 
-    width:100vw;
-    height:100dvh;
+    min-width:100dvw;
+    min-height:100dvh;
 
     overflow:hidden;
 }
@@ -101,13 +104,13 @@ input{
 }
 
 .life{
-    font-size:min(8vw, 30px);
+    font-size:clamp(20px, 8vw, 30px);
     margin-top:10px;
     cursor:pointer;
 }
 
 #calcScreen{
-    height:100vh;
+    min-height:100dvh;
     box-sizing:border-box;
     overflow:hidden;
 }
@@ -119,13 +122,13 @@ input{
 }
 
 .calc-display{
-    font-size:clamp(24px, 10vw, 48px);
+    font-size:clamp(20px, 8vw, 40px);
     margin:-2vh;
 }
 
 .current-life{
     font-size:clamp(18px, 5vw, 28px);
-    margin-bottom:1vh;
+    margin-bottom:0vh;
 }
 
 .calc-buttons{
@@ -141,6 +144,10 @@ input{
     font-size:20px;
 }
 
+
+#calcInner{
+    width:100%;
+}
 
 .utility{
     background:#1d1d1d;
@@ -228,13 +235,11 @@ button:active{
 
 <!-- 開始プレイヤー -->
 <div id="startScreen" class="screen">
-
     <h1>開始プレイヤー</h1>
 
     <h2 id="starterText"></h2>
 
     <button onclick="showGame()">対戦開始</button>
-
 </div>
 
 <!-- メイン -->
@@ -246,7 +251,7 @@ button:active{
 
 <!-- 計算 -->
 <div id="calcScreen" class="screen">
-
+    <div id="calcInner">
     <h1 id="calcPlayerName"></h1>
 
     <div class="current-life">
@@ -279,7 +284,7 @@ button:active{
         <button onclick="cancelCalc()">戻る</button>
 
     </div>
-
+    </div>
 </div>
 
 <script>
@@ -400,9 +405,7 @@ function showGame(){
         <button onclick="flipCoin()">🪙 コイン</button>
         <span id="coinResult">-</span>
 
-	<button onclick="resetGame()">
-	リセット
-	</button>
+	<button onclick="resetGame()">リセット</button>
 
     </div>
 
@@ -430,7 +433,7 @@ function openCalculator(index){
         .innerText = players[index].life;
 
     const calcScreen =
-        document.getElementById("calcScreen");
+        document.getElementById("calcInner");
 
     calcScreen.classList.remove("rotated");
 
