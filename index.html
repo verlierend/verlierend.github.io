@@ -8,6 +8,9 @@
                maximum-scale=1,
                user-scalable=no,
                viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent">
 <title>ライフ計算</title>
 
 <style>
@@ -36,7 +39,7 @@ body{
     box-sizing:border-box;
 
     width:100vw;
-    height:100vh;
+    height:100dvh;
 
     overflow:hidden;
 }
@@ -116,12 +119,12 @@ input{
 }
 
 .calc-display{
-    font-size:min(10vw,30px);
+    font-size:clamp(24px, 10vw, 48px);
     margin:-2vh;
 }
 
 .current-life{
-    font-size:min(5vw,28px);
+    font-size:clamp(18px, 5vw, 28px);
     margin-bottom:1vh;
 }
 
@@ -160,6 +163,8 @@ button:active{
     user-select:none;
     -webkit-user-select:none;
 }
+
+
 @media screen and (orientation: landscape){
 
     .player{
@@ -395,6 +400,10 @@ function showGame(){
         <button onclick="flipCoin()">🪙 コイン</button>
         <span id="coinResult">-</span>
 
+	<button onclick="resetGame()">
+	リセット
+	</button>
+
     </div>
 
     <div class="row">${bottomHTML}</div>
@@ -518,6 +527,22 @@ function flipCoin(){
         display.innerText = result;
 
     },300);
+}
+
+function resetGame(){
+
+    if(confirm("ゲームをリセットしますか？")){
+
+        players = [];
+
+        currentPlayer = null;
+
+        calcValue = "";
+
+        calcOperator = "";
+
+        changeScreen("setupScreen");
+    }
 }
 
 </script>
